@@ -42,4 +42,16 @@ public class MemberServiceImpl implements MemberService {
 		log.info("list check 2");
 		return mdao.getList();
 	}
+
+	@Override
+	public int modify(MemberVO mvo) {
+		log.info("modify check 2");
+		return mdao.update(mvo);
+	}
+
+	@Override
+	public int remove(String id) {
+		log.info("remove check 2");
+		return mdao.delete(id);
+	}
 }

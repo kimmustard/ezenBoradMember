@@ -37,6 +37,6 @@
 		</table>
 		<button type="submit">확인</button>
 	</form>
-		<a href="/brd/list"><button type="button">취소</button></a>
+		<a href="/brd/pageList"><button type="button">취소</button></a>
 </body>
 </html>

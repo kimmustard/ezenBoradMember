@@ -34,7 +34,7 @@
 		</table>
 		<a href="/brd/modify?bno=${bvo.bno}"><button type="button">수정</button></a>
 		<a href="/brd/remove?bno=${bvo.bno}"><button type="button">삭제</button></a>
-		<a href="/brd/list"><button type="button">리스트</button></a>
+		<a href="/brd/pageList"><button type="button">리스트</button></a>
 		
 </body>
 </html>

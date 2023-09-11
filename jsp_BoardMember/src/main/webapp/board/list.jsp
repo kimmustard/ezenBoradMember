@@ -24,8 +24,8 @@
 		<tr>
 			<td><a href="/brd/detail?bno=${bvo.bno }">${bvo.bno }</a></td>
 			<td><a href="/brd/detail?bno=${bvo.bno }">${bvo.title }</a></td>
-			<td>${bvo.writer }</td>
 			<td>${bvo.content }</td>
+			<td>${bvo.regdate }</td>
 		</tr>
 		
 		
@@ -33,6 +33,25 @@
 		
 		
 		</table>
+		
+		<!-- 페이지네이션 표시 구역 -->
+		<div>
+		
+		<!-- prev -->
+		<c:if test="${ph.prev }">
+		<a href="/brd/pageList?pageNo=${ph.startPage-1 }&qty=${ph.pgvo.qty }"> ◁ | </a>
+		</c:if>
+		<c:forEach begin="${ph.startPage }" end="${ph.endPage }" var="i">
+			<a href="/brd/pageList?pageNo=${i }&qty=${ph.pgvo.qty }">${i } </a>
+			
+		</c:forEach>
+		
+		<!-- next  -->
+		<c:if test="${ph.next }">
+		<a href="/brd/pageList?pageNo=${ph.endPage+1 }&qty=${ph.pgvo.qty }"> | ▷ </a>
+		</c:if>
+		
+		</div>
 		
 		<a href="/brd/register"><button type="button">글쓰기</button></a>
 		<a href="/index.jsp"><button type="button">메인으로</button></a>

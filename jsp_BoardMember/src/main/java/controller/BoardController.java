@@ -14,6 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import domain.BoardVO;
+import domain.PagingVO;
+import handler.PagingHandler;
 import service.BoardServiceImpl;
 import service.Service;
 
@@ -153,9 +155,45 @@ public class BoardController extends HttpServlet {
 				int bno = Integer.parseInt(request.getParameter("bno"));
 				isOk = bsv.remove(bno);
 				log.info((isOk>0)? "Ok": "Fail");
-				destPage = "list";
+				destPage = "pageList";
 			} catch (Exception e) {
 				log.info("remove error!");
+				e.printStackTrace();
+			}
+			
+			
+			break;
+			
+			
+		case "pageList":
+			
+			try {
+				//JSP에서 파라미터 받기
+				PagingVO pgvo = new PagingVO();	// 기본생성자가 (1,10) 첫페이지 10개가 기본
+				if(request.getParameter("pageNo")!=null){
+					int pageNo = Integer.parseInt(request.getParameter("pageNo"));
+					int qty = Integer.parseInt(request.getParameter("qty"));
+					log.info("pageNo = {}", pageNo);
+					log.info("qty = {}", qty);
+					pgvo = new PagingVO(pageNo, qty);
+				}
+				
+				// PagingVO, totalCount
+				int totalCount = bsv.getTotalCount(); //DB에서 전체 카운트 요청
+				log.info("totalCount = {}", totalCount);
+				//bsv pgvo주고 , limit 적용한 리스트 가져오기
+				List<BoardVO> list = bsv.getPageList(pgvo);
+				request.setAttribute("list", list);
+				
+				//페이지 정보도 추가적으로 list.jsp에 보내야한다.
+				PagingHandler ph = new PagingHandler(pgvo, totalCount);
+				request.setAttribute("ph", ph);
+				log.info("paging check 4");
+				destPage="/board/list.jsp";
+				
+				
+			} catch (Exception e) {
+				log.info("pageList error!");
 				e.printStackTrace();
 			}
 			

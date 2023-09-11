@@ -23,7 +23,7 @@
 		${ses.id } login 하였습니다. <br>
 		계정생성일 : ${ses.regdate } <br>		
 		마지막접속 : ${ses.lastlogin } <br>
-		<a href="#"><button> 회원정보 수정 </button></a>
+		<a href="/mem/modify"><button> 회원정보 수정 </button></a>
 		<a href="/mem/list"><button> 회원정보 리스트 </button></a>
 		<a href="/mem/logout"><button> 로그아웃 </button></a>
 		<a href="/brd/register"><button> 게시판 글쓰기 </button></a>
@@ -34,7 +34,7 @@
 		
 		<br>
 	
-		<a href="/brd/list"><button> 게시판 리스트 </button></a>
+		<a href="/brd/pageList"><button> 게시판 리스트 </button></a>
 		
 		<script type="text/javascript">
 		const msg_login = `<c:out value="${msg_login}" />`;

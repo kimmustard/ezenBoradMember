@@ -54,6 +54,26 @@ public class MemberDAOImpl implements MemberDAO {
 		log.info("list check 3");
 		return sql.selectList(NS+"list");
 	}
+
+	@Override
+	public int update(MemberVO mvo) {
+		log.info("modify check 3");
+		int isOk = sql.update(NS+"up", mvo);
+		if(isOk > 0) {
+			sql.commit();
+		}
+		return isOk;
+	}
+
+	@Override
+	public int delete(String id) {
+		log.info("delete check 3");
+		int isOk = sql.delete(NS+"del",id);
+		if(isOk > 0) {
+			sql.commit();
+		}
+		return isOk;
+	}
 	
 	
 	

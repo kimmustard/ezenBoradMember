@@ -36,6 +36,11 @@ public class MemberController extends HttpServlet {
         msv = new MemberServiceImpl();
        
     }
+    
+    
+   
+    
+    
 
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,7 +52,8 @@ public class MemberController extends HttpServlet {
 		log.info("path = {}", path);
 		
 		switch(path) {
-			
+
+		
 		case "join":	//회원가입 페이지 form
 			log.info("회원가입 페이지 열기");
 			destPage="/member/join.jsp";
@@ -151,7 +157,69 @@ public class MemberController extends HttpServlet {
 			
 			break;
 			
+		case "modify":
+			log.info("modify page 이동");
+			destPage="/member/modify.jsp";
+			
+			
+			break;
+			
+			
+		case "update":
+			
+			try {
+				log.info("modify check 1");
+				//JSP에서 보낸 객체 파라미터 가져와서 mvo 객체 생성
+				String id = request.getParameter("id");
+				String pwd = request.getParameter("pwd");
+				String email = request.getParameter("email");
+				int age = Integer.parseInt(request.getParameter("age"));
+				MemberVO mvo = new MemberVO(id, pwd, email, age);
+				log.info("mvo = {}" , mvo);
+				
+				// member service에게 수정요청 -> mdao 수정요청 -> mapper 수정요청
+				isOk = msv.modify(mvo);
+				log.info("modify check 4" + ((isOk>0)? "Ok" : "Fail"));
+				//destPage 는 세션끊고 index로 이동 (재로그인 유도)
+				
+				destPage = "logout";
+				
+			} catch (Exception e) {
+				log.info("modify error!");
+				e.printStackTrace();
+			}
+			
+			break;
+			
+		case "remove":
+			try {
+				// 세션에 저장된 아이디패스워드를 가져온다
+				log.info("remove check 1");
+				HttpSession ses = request.getSession();
+				MemberVO mvo = (MemberVO) ses.getAttribute("ses");
+				String id = mvo.getId();
+				
+				//msv에 id주고 객체 삭제요청 -> mdao id삭제요청 -> mapper 삭제요청
+				isOk = msv.remove(id);
+				//세션 끊고 , index로 이동
+				ses.invalidate();
+				destPage = "/index.jsp";
+	
+				
+			} catch (Exception e) {
+				log.info("remove error!");
+				e.printStackTrace();
+			}
+						
+			
+			break;
+			
+			
+			
+			
+			
 		}
+		
 		
 		
 		

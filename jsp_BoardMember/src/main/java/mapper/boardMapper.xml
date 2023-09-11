@@ -9,7 +9,7 @@
 	</insert>
 	
 	<select id="list" resultType="bvo">
-		select * from board order by bno desc
+		select * from board order by bno desc limit 0, 10
 	</select>
 	
 	<select id="detail" parameterType="int" resultType="bvo">
@@ -24,4 +24,13 @@
 	<delete id="del" parameterType="int">
 		delete from board where bno = #{bno}
 	</delete>
+	
+	<select id="cnt" resultType="int">
+	  select count(*) from board
+	</select>
+	
+	<select id="page" parameterType="pgvo" resultType="bvo">
+  		select * from board order by bno desc limit #{pageStart}, #{qty}
+    </select>
+  
 </mapper>
