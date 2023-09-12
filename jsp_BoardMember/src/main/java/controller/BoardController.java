@@ -177,9 +177,16 @@ public class BoardController extends HttpServlet {
 					log.info("qty = {}", qty);
 					pgvo = new PagingVO(pageNo, qty);
 				}
+				// 검색어 받기
+				String type = request.getParameter("type");
+				String keyword = request.getParameter("keyword");
+				pgvo.setType(type);
+				pgvo.setKeyword(keyword);
+				log.info("type : " + pgvo.getType() + ", keyword : " + pgvo.getKeyword());
+				
 				
 				// PagingVO, totalCount
-				int totalCount = bsv.getTotalCount(); //DB에서 전체 카운트 요청
+				int totalCount = bsv.getTotalCount(pgvo); //DB에서 전체 카운트 요청
 				log.info("totalCount = {}", totalCount);
 				//bsv pgvo주고 , limit 적용한 리스트 가져오기
 				List<BoardVO> list = bsv.getPageList(pgvo);

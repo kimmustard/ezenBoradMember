@@ -17,7 +17,7 @@ public interface BoardDAO {
 
 	int delete(int bno);
 
-	int getTotalCount();
+	int getTotalCount(PagingVO pgvo);
 
 	List<BoardVO> getPageList(PagingVO pgvo);
 

@@ -22,11 +22,12 @@ public class PagingHandler {
 		//페이지번호 / 한 화면의 게시글 수(10) * 한 화면의 게시글 수(10)
 		// 1 / 10 = 0.1 1 * 10 = 10
 		// 2 / 10 = 0.2 1 * 10 = 10
-		this.endPage = 
+		// 11 / 10 = 1.1 2 * 20 = 20
+		this.endPage =
 				(int)Math.ceil(pgvo.getPageNo() / (double) pgvo.getQty()) * pgvo.getQty();
 		
 		this.startPage = this.endPage - 9;
-		
+		  
 		
 		//게시글 수 = 11개 1,2
 		//전체 게시글 수 / 한 화면에 나오는 게시글 수
