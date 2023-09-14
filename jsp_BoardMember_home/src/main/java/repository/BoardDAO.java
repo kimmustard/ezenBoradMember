@@ -1,0 +1,29 @@
+package repository;
+
+import java.util.List;
+
+import domain.BoardVO;
+import domain.CommentVO;
+import domain.PagingVO;
+
+public interface BoardDAO {
+
+	int insert(BoardVO bvo);
+
+	List<BoardVO> selectList();
+
+	BoardVO selectOne(int bno);
+
+	int update(BoardVO bvo);
+
+	int delete(int bno);
+
+	int getTotalCount(PagingVO pgvo);
+
+	List<BoardVO> getPageList(PagingVO pgvo);
+
+	List<CommentVO> cmtSelectList(int bcno);
+
+	int insertCmt(CommentVO cvo);
+
+}
