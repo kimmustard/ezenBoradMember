@@ -1,0 +1,7 @@
+create table comment(
+cno int not null auto_increment,
+bcno int not null,
+writer varchar(100) not null,
+content text,
+regdate datetime default now(),
+primary key(cno));
