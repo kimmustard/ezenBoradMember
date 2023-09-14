@@ -1,0 +1,3 @@
+https://devkuka.tistory.com/242
+
+https://velog.io/@chlgustjr/SpringBoot-Controller-Service-Repository-%EC%9D%98%EC%A1%B4%EC%84%B1-%EC%A3%BC%EC%9E%85

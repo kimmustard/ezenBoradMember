@@ -11,8 +11,8 @@
 	<h1> 수정 페이지 </h1>
 	
 	<form action="/brd/edit" method="post">
-		<tr>
 	<table border="1">
+		<tr>
 			<th>글번호</th>
 			<td><input type="text" name="bno" readonly="readonly" value="${bvo.bno }"></td>
 		</tr>
