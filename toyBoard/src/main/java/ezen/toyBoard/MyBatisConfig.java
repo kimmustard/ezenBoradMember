@@ -1,51 +1,34 @@
 package ezen.toyBoard;
 
-import javax.sql.DataSource;
-
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import ezen.toyBoard.repository.BoardRepository;
+import ezen.toyBoard.repository.BoardRepositoryImp;
+import ezen.toyBoard.repository.mybatis.BoardMapper;
+import ezen.toyBoard.service.BoardService;
+import ezen.toyBoard.service.BoardServiceImpl;
+
 @Configuration
-@MapperScan(value = "ezen.toyBoard", sqlSessionFactoryRef = "SqlSessionFactory")
 public class MyBatisConfig {
 
-	
-	@Value("${spring.datasource.mapper-locations}")
-	String mPath;
-	
+	private final BoardMapper boardMapper;
+
+	@Autowired
+	public MyBatisConfig(BoardMapper boardMapper) {
+		this.boardMapper = boardMapper;
+	}
 	
 	
 	@Bean
-	@ConfigurationProperties(prefix = "spring.datasource")
-	public DataSource DataSource() {
-		return DataSourceBuilder.create().build();
-
+	public BoardService boardService() {
+		return new BoardServiceImpl(boardRepository());
 	}
 	
-	
-	@Bean(name = "SqlSessionFactory")
-	public SqlSessionFactory SqlSessionFactory(@Qualifier("dataSource") DataSource DataSource, 
-			ApplicationContext applicationContexnt) throws Exception {
-		
-		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-		sqlSessionFactoryBean.setDataSource(DataSource);
-		sqlSessionFactoryBean.setMapperLocations(applicationContexnt.getResources(mPath));
-		
-		return sqlSessionFactoryBean.getObject();
-	}
-	
-	public SqlSessionTemplate SqlSessionTemplate(@Qualifier("SqlSessionFactory") SqlSessionFactory firstSqlSessionFactory) {
-		
-		return new SqlSessionTemplate(firstSqlSessionFactory);
+	@Bean
+	public BoardRepository boardRepository() {
+		return new BoardRepositoryImp(boardMapper);
 	}
 	
 }
