@@ -2,10 +2,11 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="BoardMapper">
+<mapper namespace="ezen.toyBoard.repository.mybatis.BoardMapper">
+
 	<insert id="insert">
 		insert into board(title, writer, content) values (#{title}, #{writer}, #{content})
 	</insert>
-
-
+	
+	
 </mapper>
