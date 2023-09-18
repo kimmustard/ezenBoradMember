@@ -20,6 +20,7 @@ public class MyBatisConfig {
 		this.boardMapper = boardMapper;
 	}
 	
+	
 	@Bean
 	public BoardService boardService() {
 		return new BoardServiceImpl(boardRepository());
