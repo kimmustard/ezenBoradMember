@@ -6,5 +6,7 @@ import ezen.toyBoard.domain.BoardVO;
 
 @Mapper
 public interface BoardMapper {
+	
 	void insert(BoardVO bvo);
+	
 }
