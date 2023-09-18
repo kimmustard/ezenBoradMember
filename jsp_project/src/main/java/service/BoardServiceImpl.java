@@ -9,15 +9,19 @@ import domain.BoardVO;
 import domain.PagingVO;
 import repository.BoardDAO;
 import repository.BoardDAOImpl;
+import repository.CommentDAO;
+import repository.CommentDAOImpl;
 
 public class BoardServiceImpl implements Service {
 
 	private static final Logger log = LoggerFactory.getLogger(BoardServiceImpl.class);
 	
 	private BoardDAO bdao;
+	private CommentDAO cdao; 
 
 	public BoardServiceImpl() {
 		bdao = new BoardDAOImpl();
+		cdao = new CommentDAOImpl();
 	}
 
 	@Override
@@ -47,6 +51,7 @@ public class BoardServiceImpl implements Service {
 	@Override
 	public int remove(int bno) {
 		log.info("remove check 2");
+		cdao.cmtdel(bno);
 		return bdao.delete(bno);
 	}
 

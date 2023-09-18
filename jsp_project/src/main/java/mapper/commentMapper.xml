@@ -7,5 +7,20 @@
   		insert into comment(bno, writer, content) values(#{bno}, #{writer}, #{content})
   	</insert>
   
+  	<select id="list" parameterType="int" resultType="cvo">
+  		select * from comment where bno = #{bno}
+  	</select>
+  	
+  	<update id="up" parameterType="cvo">
+  		update comment set content = #{content} where cno = #{cno}
+  	</update>
+  	
+  	<delete id="del" parameterType="int">
+  		delete from comment where cno = #{cno}
+  	</delete>
+  
+    <delete id="cmtdel" parameterType="int">
+  	delete from comment where bno = ${bno}
+ 	 </delete>
   
  </mapper>

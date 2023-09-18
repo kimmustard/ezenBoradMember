@@ -12,7 +12,7 @@
 <body>
 	<h1> 게시글 상세정보 페이지 </h1>
 	
-	<table class="table-secondary">
+	<table class="table table-hover">
 		<tr>
 			<th>글번호</th>
 			<td>${bvo.bno }</td>
@@ -79,6 +79,8 @@
   </script>
   
   <script src="/resource/board_detail.js"></script>
-		
+	<script type="text/javascript">
+	printCommentList(bnoVal);
+	</script>
 </body>
 </html>

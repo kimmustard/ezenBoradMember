@@ -6,7 +6,7 @@ public class CommentVO {
 	private int bno;
 	private String writer;
 	private String content;
-	private String regedate;
+	private String regdate;
 
 	public CommentVO() {
 
@@ -28,12 +28,12 @@ public class CommentVO {
 	
 
 	//전체조회
-	public CommentVO(int cno, int bno, String writer, String content, String regedate) {
+	public CommentVO(int cno, int bno, String writer, String content, String regdate) {
 		this.cno = cno;
 		this.bno = bno;
 		this.writer = writer;
 		this.content = content;
-		this.regedate = regedate;
+		this.regdate = regdate;
 	}
 
 	public int getCno() {
@@ -68,18 +68,18 @@ public class CommentVO {
 		this.content = content;
 	}
 
-	public String getRegedate() {
-		return regedate;
+	public String getRegdate() {
+		return regdate;
 	}
 
-	public void setRegedate(String regedate) {
-		this.regedate = regedate;
+	public void setRegdate(String regedate) {
+		this.regdate = regedate;
 	}
 
 	@Override
 	public String toString() {
-		return "CommentVO [cno=" + cno + ", bno=" + bno + ", writer=" + writer + ", content=" + content + ", regedate="
-				+ regedate + "]";
+		return "CommentVO [cno=" + cno + ", bno=" + bno + ", writer=" + writer + ", content=" + content + ", regdate="
+				+ regdate + "]";
 	}
 
 	

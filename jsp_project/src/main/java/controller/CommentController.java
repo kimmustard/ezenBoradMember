@@ -3,6 +3,7 @@ package controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
@@ -68,10 +70,10 @@ public class CommentController extends HttpServlet {
 			pathVar = pathUri.substring(pathUri.lastIndexOf("/")+1); // 10
 		}
 		
-		log.info("uri = {}", uri);
-		log.info("path = {}", path);
-		log.info("pathUri = {}", pathUri);
-		log.info("pathVar = {}", pathVar);
+		log.info("uri = {}", uri);	///cmt/list/글번호
+		log.info("path = {}", path);	//list 
+		log.info("pathUri = {}", pathUri);	// list/글번호
+		log.info("pathVar = {}", pathVar);	// 글번호
 		
 		switch(path) {
 		case "post":
@@ -87,7 +89,7 @@ public class CommentController extends HttpServlet {
 				while((line= br.readLine()) != null) {
 					sb.append(line);
 				}
-				log.info("sb = {}", sb.toString());
+				log.info("sb = {}", sb.toString());	//JSON 객체
 				
 				//객체로 변환
 				JSONParser parser = new JSONParser();
@@ -106,7 +108,8 @@ public class CommentController extends HttpServlet {
 				log.info((isOk>0)? "Ok":"Fail");
 				
 				//화면에 출력
-				PrintWriter pw = response.getWriter();
+				//화면에 뿌린다(X) 해당 페이지로 데이터를 보낸다.
+				PrintWriter pw = response.getWriter();	
 				pw.print(isOk);
 				
 			} catch (Exception e) {
@@ -114,7 +117,102 @@ public class CommentController extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
+			
+			
+		case "list": //   list/151 
+			try {
+				
+				int bno = Integer.parseInt(pathVar);
+				List<CommentVO> list = csv.getList(bno);
+				log.info("Comment , list = {}" , list);
+				
+				//JSON 형태로 변환 => 화면에 전송
+				JSONObject[] jsonObjArr = new JSONObject[list.size()];
+				
+				JSONArray jsonList = new JSONArray();
+				for (int i = 0; i < list.size(); i++) {
+					/*
+					 * JSON으로 보내기전 key : value 형태로 값을만들어준다.
+					 */
+					jsonObjArr[i] = new JSONObject();
+					jsonObjArr[i].put("cno", list.get(i).getCno());
+					jsonObjArr[i].put("bno", list.get(i).getBno());
+					jsonObjArr[i].put("writer", list.get(i).getWriter());
+					jsonObjArr[i].put("content", list.get(i).getContent());
+					jsonObjArr[i].put("regdate", list.get(i).getRegdate());
+					
+					jsonList.add(jsonObjArr[i]);
+				}
+				//JSON 값을 String으로 변환 (전송용)
+				String jsonData = jsonList.toJSONString();
+				
+				//전송 객체에 싣고 화면으로 전송
+				PrintWriter out = response.getWriter();
+				out.print(jsonData);
+				
+				
+				
+			} catch (Exception e) {
+				log.info("Comment list Error!");
+				e.printStackTrace();
+			}
+			
+			
+			
+			break;
 		
+		case "modify":
+			
+			try {
+				StringBuffer sb = new StringBuffer();
+				String line = "";
+				
+				BufferedReader br = request.getReader();
+				while((line=br.readLine()) != null) {
+					sb.append(line);
+				}
+				log.info("Modify sb = {}", sb.toString());
+				
+				//JSON형태의 객체로 변환
+				JSONParser parser = new JSONParser();
+				JSONObject jsonObj = (JSONObject) parser.parse(sb.toString());
+				
+				int cno = Integer.parseInt(jsonObj.get("cno").toString());
+				String content = jsonObj.get("content").toString();
+				CommentVO cvo = new CommentVO(cno, content);
+				
+				isOk = csv.modify(cvo);
+				log.info((isOk>0)? "Ok" : "Fail");
+				
+				PrintWriter out = response.getWriter();
+				out.print(isOk);
+				
+			} catch (Exception e) {
+				log.info("Comment modify Error!");
+				e.printStackTrace();
+			}
+			break;
+			
+			
+			
+		case "remove":
+			
+			try {
+				// 쿼리 스트링으로 데이터를 보냈을 경우.
+				int cno = Integer.parseInt(pathVar);
+				isOk = csv.remove(cno);
+				log.info((isOk>0)? "Ok" : "Fail");
+				
+				PrintWriter out = response.getWriter();
+				out.print(isOk);
+				
+			} catch (Exception e) {
+				log.info("Comment remove Error!");
+				e.printStackTrace();
+			}
+			
+			break;
+			
 		}
 		
 		
