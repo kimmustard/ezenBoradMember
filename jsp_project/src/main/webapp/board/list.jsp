@@ -50,7 +50,12 @@
 	<c:forEach items="${list }" var="bvo">
 	<tr>
 		<td><a href="/brd/detail?bno=${bvo.bno }">${bvo.bno }</a></td>
-		<td><a href="/brd/detail?bno=${bvo.bno }">${bvo.title }</a></td>
+		<td>
+		<c:if test="${bvo.image_File ne '' && bvo.image_File ne null }">
+			<img src="/_fileUpload/_th_${bvo.image_File }">
+		</c:if>
+		<a href="/brd/detail?bno=${bvo.bno }">${bvo.title }</a></td>
+		
 		<td>${bvo.writer }</td>
 		<td>${bvo.content }</td>
 		<td>${bvo.views }</td>

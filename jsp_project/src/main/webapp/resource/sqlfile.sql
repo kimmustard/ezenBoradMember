@@ -7,6 +7,7 @@ writer varchar(100) not null,
 content text,
 regdate datetime default now(),
 moddate datetime default now(),
+-- 첨부파일 추가
 primary key(bno));
 
 
@@ -33,4 +34,10 @@ content varchar(1000),
 regdate datetime default now(),
 primary key(cno)
 );
+
+
+-- 이미지 업로드 추가
+//BoardDB
+alter table board add image_File varchar(500);
+
 

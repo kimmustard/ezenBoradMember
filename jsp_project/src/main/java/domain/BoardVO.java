@@ -8,6 +8,7 @@ public class BoardVO {
 	private String regdate;
 	private String moddate;
 	private int views;
+	private String image_File;
 	
 
 	public BoardVO() {
@@ -37,13 +38,15 @@ public class BoardVO {
 
 	
 	//detail
-	public BoardVO(int bno, String title, String writer, String content, String regdate, String moddate) {
+	public BoardVO(int bno, String title, String writer, 
+			String content, String regdate, String moddate, String image_File) {
 		this.bno = bno;
 		this.title = title;
 		this.writer = writer;
 		this.content = content;
 		this.regdate = regdate;
 		this.moddate = moddate;
+		this.image_File = image_File;
 	}
 	
 	
@@ -90,11 +93,21 @@ public class BoardVO {
 	public void setModdate(String moddate) {
 		this.moddate = moddate;
 	}
+
+	
+	public String getImage_File() {
+		return image_File;
+	}
+	public void setImage_File(String image_File) {
+		this.image_File = image_File;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", content=" + content + ", regdate="
-				+ regdate + ", moddate=" + moddate + "]";
+				+ regdate + ", moddate=" + moddate + ", views=" + views + ", image_File=" + image_File + "]";
 	}
+	
+	
 
 	
 }

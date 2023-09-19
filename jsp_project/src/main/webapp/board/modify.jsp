@@ -11,7 +11,7 @@
 
 	<h1> 게시글 수정 페이지 </h1>
 	
-	<form action="/brd/edit" method="post">
+	<form action="/brd/edit" method="post" enctype="multipart/form-data">
 	<table border="1">
 	
 	<tr>
@@ -33,6 +33,13 @@
 	<tr>
 		<th>수정날짜</th>
 		<td>${bvo.moddate }</td>
+	</tr>
+	<tr>
+		<th>이미지 파일</th>
+		<td>
+			<input type="hidden" name="image_file" value="${bvo.image_File }">
+			<input type="file" name="new_file" accept="image/png, image/jpg, image/gif">
+		</td>
 	</tr>
 	
 	

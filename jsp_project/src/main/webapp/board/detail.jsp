@@ -11,7 +11,11 @@
 </head>
 <body>
 	<h1> 게시글 상세정보 페이지 </h1>
-	
+	<c:if test="${bvo.image_File ne '' && bvo.image_File ne null }">
+		<div>
+			<img src="/_fileUpload/${bvo.image_File }" alt="No Image!!">
+		</div>
+	</c:if>
 	<table class="table table-hover">
 		<tr>
 			<th>글번호</th>
@@ -40,8 +44,10 @@
 	</table>
 		<br>
 		
+		<c:if test="${ses.id eq bvo.writer}">
 		<a href="/brd/modify?bno=${bvo.bno}"><button type="button">수정</button></a>
 		<a href="/brd/remove?bno=${bvo.bno}"><button type="button">삭제</button></a>
+		</c:if>
 		<a href="/brd/pageList"><button type="button"> 리스트로 </button></a>
 		
 		<br>
