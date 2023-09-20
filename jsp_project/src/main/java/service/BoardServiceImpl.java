@@ -65,6 +65,11 @@ public class BoardServiceImpl implements Service {
 	public List<BoardVO> getPageList(PagingVO pgvo) {
 		return bdao.getPageList(pgvo);
 	}
+
+	@Override
+	public String getFileName(int bno) {
+		return bdao.getFileName(bno);
+	}
 	
 	
 }

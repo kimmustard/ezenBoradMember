@@ -17,6 +17,7 @@
 			<div>
 				<c:set value="${ph.pgvo.type }" var="typed"></c:set>
 				
+				
 				<select name="type">
 					<option ${typed == null? 'selected' : '' }> 검색목록 </option>
 					<option value="t" ${typed eq 't'? 'selected':''}> 제목</option>

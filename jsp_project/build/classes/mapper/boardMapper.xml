@@ -25,6 +25,10 @@
   	where bno = #{bno}
   </update>
   
+  <select id="fileName" parameterType="int" resultType="string">
+  	select image_File from board where bno = #{bno}
+  </select>
+  
   <delete id="del" parameterType="int">
   	delete from board where bno = ${bno}
   </delete>
@@ -44,7 +48,7 @@
   
   <sql id="search">
   	<if test="type != null">
-  		<trim prefix="WHERE " prefixOverrides="OR">
+  		<trim prefix="WHERE" prefixOverrides="OR">
 	  		<foreach collection="typeToArray" item="type">
 	  			<trim prefix="OR">
 		  			<choose>

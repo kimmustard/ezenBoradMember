@@ -3,17 +3,18 @@ package domain;
 public class PagingVO {
 
 	
-	private int pageNo;
-	private int qty;
+	private int pageNo;	//현재 화면에 출력되는 페이지네이션 번호
+	private int qty;	//한 페이지당 보여줄 게시글 수 
 	
-	private String type;
-	private String keyword;
+	//검색 멤버변수를 추가
+	private String type;	//검색 대상
+	private String keyword;	//검색어
 	
 	public PagingVO() {
 		this(1,10);
 	}
 	
-	public PagingVO(int pageNo, int qty) {
+	public PagingVO(int pageNo, int qty) {	//페이지네이션을 클릭하기 전 기본리스트 출력값
 		this.pageNo = pageNo;
 		this.qty = qty;
 	}

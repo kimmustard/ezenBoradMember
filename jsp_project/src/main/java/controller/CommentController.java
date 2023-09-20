@@ -128,6 +128,9 @@ public class CommentController extends HttpServlet {
 				
 				//JSON 형태로 변환 => 화면에 전송
 				JSONObject[] jsonObjArr = new JSONObject[list.size()];
+				// [{...},{...},{...},{...},{...},{...},{...},{...},{...}] 이형태로 앞단에 보내는과정
+				
+				
 				
 				JSONArray jsonList = new JSONArray();
 				for (int i = 0; i < list.size(); i++) {
@@ -145,7 +148,7 @@ public class CommentController extends HttpServlet {
 				}
 				//JSON 값을 String으로 변환 (전송용)
 				String jsonData = jsonList.toJSONString();
-				
+				// '[{...},{...},{...},{...},{...},{...},{...},{...},{...}]' 보낸 string array에 따옴표만 달아주는것
 				//전송 객체에 싣고 화면으로 전송
 				PrintWriter out = response.getWriter();
 				out.print(jsonData);

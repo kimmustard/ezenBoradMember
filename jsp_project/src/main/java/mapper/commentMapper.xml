@@ -20,7 +20,7 @@
   	</delete>
   
     <delete id="cmtdel" parameterType="int">
-  	delete from comment where bno = ${bno}
+  	delete from comment where bno = #{bno}
  	 </delete>
   
  </mapper>

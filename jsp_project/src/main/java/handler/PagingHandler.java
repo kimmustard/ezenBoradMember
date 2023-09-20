@@ -29,8 +29,8 @@ public class PagingHandler {
 			this.endPage = this.realEndPage;
 		}
 		
-		this.prev = this.startPage > 1;	//왼쪽화살표 존재여부
-		this.next = this.endPage < realEndPage; //오른쪽 화살표 존재여부
+		this.prev = this.startPage > 1;	//왼쪽화살표 존재여부 1, 11, 21 ,31 . . . . . .
+		this.next = this.endPage < realEndPage; //오른쪽 화살표 존재여부 전체 게시글수
 
 
 	}

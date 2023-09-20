@@ -78,6 +78,11 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<BoardVO> getPageList(PagingVO pgvo) {
 		return sql.selectList(NS+"page", pgvo);
 	}
+
+	@Override
+	public String getFileName(int bno) {
+		return sql.selectOne(NS+"fileName", bno);
+	}
 	
 	
 	

@@ -111,13 +111,11 @@ public class BoardController extends HttpServlet {
 				for (FileItem item : itemList) {
 					switch(item.getFieldName()) {
 						case "title":
-							bvo.setTitle(item.getString("utf-8"));	//인코딩 형식을 담아서 변환
-							
-							
+							bvo.setTitle(item.getString("utf-8"));	//인코딩 형식을 담아서 변환	
 							break;
+							
 						case "writer":
 							bvo.setWriter(item.getString("utf-8"));
-							
 							break;
 							
 						case "content":
@@ -330,8 +328,33 @@ public class BoardController extends HttpServlet {
 		case "remove":
 			try {
 				log.info("remove check 1 ");
+				//삭제할 bno의 image_file Name을 불러오기
 				int bno = Integer.parseInt(request.getParameter("bno"));
+				String fileName = bsv.getFileName(bno);
+				//savePath 값 생성
+				savePath = getServletContext().getRealPath("/_fileUpload");
+//				//파일 핸들러에서 삭제요청
+				FileHandler fileHandler = new FileHandler();
+				isOk = fileHandler.deleteFile(fileName, savePath);
+				log.info((isOk > 0)? "file remove Ok" : "file remove Fail");
+				
+				
+				
+				
+				//내가한거
+//				savePath = getServletContext().getRealPath("/_fileUpload");
+//				BoardVO bvo = bsv.detail(bno);
+//				
+//				if(bvo.getImage_File() != null) {
+//					String FileName = bvo.getImage_File();
+//					FileHandler fileHandler = new FileHandler();
+//					isOk = fileHandler.deleteFile(FileName, savePath);
+//					log.info((isOk > 0)? "Ok" : "Fail");
+//				}
+				
+				
 				isOk = bsv.remove(bno);
+				log.info((isOk > 0)? "Ok" : "Fail");
 				destPage = "pageList";
 				
 			} catch (Exception e) {
